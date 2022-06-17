@@ -15,12 +15,12 @@ class UserSerializer(serializers.ModelSerializer):
                   'password'
                   )
 
-        validators = [
-            UniqueTogetherValidator(
-                queryset=User.objects.all(),
-                fields=['list', 'position']
-            )
-        ]
+        # validators = [
+        #     UniqueTogetherValidator(
+        #         queryset=User.objects.all(),
+        #         fields=['list', 'position']
+        #     )
+        # ]
 
 
 class JokeSerializer(serializers.ModelSerializer):
