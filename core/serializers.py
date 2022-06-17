@@ -1,12 +1,12 @@
 from django.contrib.auth.backends import get_user_model
 
 from rest_framework import serializers
-from .models import Joke, Activity
+from .models import Joke, Activity, User
+
+from rest_framework.validators import UniqueTogetherValidator
 
 
 class UserSerializer(serializers.ModelSerializer):
-    #url = serializers.CharField(source='get_absolute_url', read_only=True)
-
     class Meta:
         model = get_user_model()
         fields = ('id',
@@ -14,6 +14,13 @@ class UserSerializer(serializers.ModelSerializer):
                   'email',
                   'password'
                   )
+
+        validators = [
+            UniqueTogetherValidator(
+                queryset=User.objects.all(),
+                fields=['list', 'position']
+            )
+        ]
 
 
 class JokeSerializer(serializers.ModelSerializer):
